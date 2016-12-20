@@ -9,7 +9,6 @@
     <script src="res/functions.js"></script>
 
     <h1>{{ board.name }}</h1>
-    <h2>SVG</h2>
 
     {% include "board.svg" %}
     
@@ -20,5 +19,21 @@
       &nbsp;
     </div>
 
+
+    <h2>Pins</h2>
+
+    {% for cname,conn in board.connectors.items() %}
+    {% if conn.pins %}
+
+    <h3>{{ cname }}: {{ conn.name }}</h3>
+    
+    <ul>
+      {% for pname,pin in conn.pins.items() %}    
+      <li>{{ cname }}: {{ pname }} - {{ pin.name }}</li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+    {% endfor %}
+    
   </body>
 </html>

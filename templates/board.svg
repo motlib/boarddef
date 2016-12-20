@@ -1,4 +1,4 @@
-<svg width="500" height="500"
+<svg width="300" height="300"
      viewBox="{{ board.viewport[0] }} {{ board.viewport[1] }} {{ board.viewport[2] }} {{ board.viewport[3] }}">
 
      <defs>
