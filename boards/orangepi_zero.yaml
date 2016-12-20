@@ -26,7 +26,7 @@ board:
     micro_usb:
       name: Micro-USB / 5V Power Supply
       dimension: [5, 45, 4, 5]
-    13pin:
+    ext_13:
       name: 13 Pin Extension Connector
       dimension: [1, 10, 2.54, 33.02]
       pin_type: std254
@@ -40,5 +40,132 @@ board:
         3:
           name: USB-DM2
           offset: [0, 2]
+        4:
+          name: USB-DP2
+          offset: [0, 3]
+        5:
+          name: USB-DM3
+          offset: [0, 4]
+        6:
+          name: USB-DP3
+          offset: [0, 5]
+        7:
+          name: LINEOUTR
+          offset: [0, 6]
+        8:
+          name: LINEOUTL
+          offset: [0, 7]
+        9:
+          name: TV-OUT
+          offset: [0, 8]
+        10:
+          name: MIC-BIAS
+          offset: [0, 9]
+        11:
+          name: MIC1P
+          offset: [0, 10]
+        12:
+          name: MIC1N
+          offset: [0, 11]
+        13:
+          name: IR-RX
+          offset: [0, 12]
+          
+    ext_26:
+      name: 26 Pin Extension Connector
+      dimension: [35, 10, 5.08, 33.02]
+      pin_type: std254
+      pins:
+        1:
+          name: +3.3V
+          offset: [1, 12]
+        2:
+          name: +5V
+          offset: [0, 12]
+        3:
+          name: TWI0_SDA / PA12
+          offset: [1, 11]
+        4:
+          name: +5V
+          offset: [0, 11]
+        5:
+          name: TWI_SCK / PA11
+          offset: [1, 10]
+        6:
+          name: GND
+          offset: [0, 10]
+        7:
+          name: PWM1 / PA06
+          offset: [1, 9]
+        8:
+          name: UART1_TX / PG06
+          offset: [0, 9]
+        9:
+          name: GND
+          offset: [1, 8]
+        10:
+          name: UART1_RX / PG07
+          offset: [0, 8]
+        11:
+          name: UART2_RX / PA01
+          offset: [1, 7]
+        12:
+          name: SIM_CLK / PA_EINT7 / PA07
+          offset: [0, 7]
+        13:
+          name: UART2_TX / PA00
+          offset: [1, 6]
+        14:
+          name: GND
+          offset: [0, 6]
+        15:
+          name: UART2_CTS / PA03
+          offset: [1, 5]
+        16:
+          name: TWI1-SDA / PA19
+          offset: [0, 5]
+        17:
+          name: +3.3V
+          offset: [1, 4]
+        18:
+          name: TWI1-SCK / PA18
+          offset: [0, 4]
+        19:
+          name: SPI1_MISI / PA15
+          offset: [1, 3]
+        20:
+          name: GND
+          offset: [0, 3]
+        21:
+          name: SPI1_MISO / PA16
+          offset: [1, 2]
+        22:
+          name: UART2_RTS / PA02
+          offset: [0, 2]
+        23:
+          name: SPI1_CLK / PA14
+          offset: [1, 1]
+        24:
+          name: SPI1_CS / PA13
+          offset: [0, 1]
+        25:
+          name: GND
+          offset: [1, 0]
+        26:
+          name: SIM_DET / PA_EINT10 / PA10
+          offset: [0, 0]
 
-      
+    ser_con:
+      name: Serial Console Connector
+      dimension: [28, 2, 2.54, 7.62]
+      pin_type: std254
+      pins:
+        1:
+          name: GND
+          offset: [0, 0]
+        2:
+          name: RX
+          offset: [0, 1]
+        3:
+          name: TX
+          offset: [0, 2]
