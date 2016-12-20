@@ -1,0 +1,51 @@
+<svg width="500" height="500"
+     viewBox="{{ board.viewport[0] }} {{ board.viewport[1] }} {{ board.viewport[2] }} {{ board.viewport[3] }}">
+
+     <defs>
+       <g id="pin_std254">
+	 <!-- <rect x="0.12" y="0.12" width="2.4" height="2.4" -->
+	 
+	 <path d="M0.22 0.22 L2.3 0.22 L2.3 2.3 L0.22 2.3 Z" 
+	       style="fill: #222222" />
+	 
+	 <rect x="1.03" y="1.03" width="0.5" height="0.5"
+	       style="fill: #ffff00" />
+       </g>
+     </defs>
+     
+
+     <style href="styles.css" type="text/css" />
+
+  <!-- PCB -->
+  <rect class="pcb" onClick="setInfo(this, 'Printed Circuit Board');"
+	x="{{ board.pcb.dimension[0] }}"
+	y="{{ board.pcb.dimension[1] }}"
+	width="{{ board.pcb.dimension[2] }}" 
+	height="{{ board.pcb.dimension[3] }}" />
+
+  {% for ic in board.ics.values() %}
+  <rect class="ic" onClick="setInfo(this, '{{ ic.name }}');"
+	x="{{ ic.dimension[0] }}"
+	y="{{ ic.dimension[1] }}"
+	width="{{ ic.dimension[2] }}" 
+	height="{{ ic.dimension[3] }}" />
+  {% endfor %}
+  
+  {% for conn in board.connectors.values() %}
+  <rect class="conn" onClick="setInfo(this, '{{ conn.name }}');"
+	x="{{ conn.dimension[0] }}"
+	y="{{ conn.dimension[1] }}"
+	width="{{ conn.dimension[2] }}" 
+	height="{{ conn.dimension[3] }}" />
+
+    {% if conn.pins %}
+    {% for pin in conn.pins.values() %}
+    <use xlink:href="#pin_std254"
+	 onClick="setInfo(this, '{{ pin.name }}');"
+	 x="{{ pin.position[0] }}"
+	 y="{{ pin.position[1] }}" />
+    {% endfor %}
+    {% endif %}
+  
+  {% endfor %}
+</svg>
