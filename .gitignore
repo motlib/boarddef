@@ -1,0 +1,6 @@
+# Ignore generated board files
+web/*.html
+
+# Python cache and compiled modules
+__pycache__
+*.pyc

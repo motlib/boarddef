@@ -1,0 +1,15 @@
+body {
+    font-family: Calibri, sans-serif;
+}
+
+.pcb {
+    fill: #166927;
+}
+
+.conn {
+    fill: #aaaaaa;
+}
+
+.ic {
+    fill: #232830;
+}
