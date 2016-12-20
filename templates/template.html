@@ -15,7 +15,7 @@
 
     <h2>Info</h2>
 
-    <div id="info" style="border: 1pt solid gray;">
+    <div id="info" style="border: 1pt solid gray; height: 50px;">
       &nbsp;
     </div>
 
@@ -27,12 +27,23 @@
 
     <h3>{{ cname }}: {{ conn.name }}</h3>
     
+    <table border="1">
+      <tr>
+	<th>Connector</th><th>Pin Number</th><th>Class</th><th>Pin Name</th>
+      </tr>
+
     <ul>
-      {% for pname,pin in conn.pins.items() %}    
-      <li>{{ cname }}: {{ pname }} - {{ pin.name }}</li>
+      {% for pname,pin in conn.pins.items() %}
+      <tr>
+	<td>{{ cname }}</td>
+	<td>{{ pname }}</td>
+	<td>{{ pin.net }}</td>
+	<td>{{ pin.name }}</td>
+      </tr>
       {% endfor %}
       {% endif %}
-    </ul>
+    </table>
+    
     {% endfor %}
     
   </body>

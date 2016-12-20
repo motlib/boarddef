@@ -17,14 +17,15 @@
      <style href="styles.css" type="text/css" />
 
   <!-- PCB -->
-  <rect class="pcb" onClick="setInfo(this, 'Printed Circuit Board');"
+  <rect class="pcb"
 	x="{{ board.pcb.dimension[0] }}"
 	y="{{ board.pcb.dimension[1] }}"
 	width="{{ board.pcb.dimension[2] }}" 
-	height="{{ board.pcb.dimension[3] }}" />
+	height="{{ board.pcb.dimension[3] }}"
+	rx="2" ry="2" />
 
   {% for ic in board.ics.values() %}
-  <rect class="ic" onClick="setInfo(this, '{{ ic.name }}');"
+  <rect class="ic" onMouseOver="setInfo(this, '{{ ic.name }}');"
 	x="{{ ic.dimension[0] }}"
 	y="{{ ic.dimension[1] }}"
 	width="{{ ic.dimension[2] }}" 
@@ -32,7 +33,7 @@
   {% endfor %}
   
   {% for conn in board.connectors.values() %}
-  <rect class="conn" onClick="setInfo(this, '{{ conn.name }}');"
+  <rect class="conn" onMouseOver="setInfo(this, '{{ conn.name }}');"
 	x="{{ conn.dimension[0] }}"
 	y="{{ conn.dimension[1] }}"
 	width="{{ conn.dimension[2] }}" 
@@ -41,7 +42,7 @@
     {% if conn.pins %}
     {% for pin in conn.pins.values() %}
     <use xlink:href="#pin_std254"
-	 onClick="setInfo(this, '{{ pin.name }}');"
+	 onMouseOver="setInfo(this, '{{ pin.name }}');"
 	 x="{{ pin.position[0] }}"
 	 y="{{ pin.position[1] }}" />
     {% endfor %}
