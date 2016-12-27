@@ -6,7 +6,7 @@ board:
   name: OrangePi Zero
   
   pcb: 
-    dimension: [0, 0, 42, 48]
+    dimension: [0, 0, 46, 48]
 
   ics:
     main:
@@ -19,19 +19,19 @@ board:
   connectors:
     usb_1:
       name: USB-A Connector
-      dimension: [5, -4, 4, 12]
+      dimension: [6.6, -3.4, 5.5, 14]
       
     ethernet:
       name: Ethernet 10/100MBit
-      dimension: [10, -4, 12, 12]
+      dimension: [10, -3.4, 17, 16]
       
     micro_usb:
       name: Micro-USB / 5V Power Supply
-      dimension: [5, 45, 4, 5]
+      dimension: [6, 43, 7.3, 5.7]
       
     ext_13:
       name: 13 Pin Extension Connector
-      dimension: [1, 10, 2.54, 33.02]
+      dimension: [0.3, 7.4, 2.54, 33.02]
       pin_type: std254
       pins:
         1:
@@ -89,7 +89,7 @@ board:
           
     ext_26:
       name: 26 Pin Extension Connector
-      dimension: [35, 10, 5.08, 33.02]
+      dimension: [40.5, 7.4, 5.08, 33.02]
       pin_type: std254
       pins:
         1:
