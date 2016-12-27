@@ -11,10 +11,16 @@ board:
   ics:
     main:
       name: Allwinner H2+
-      dimension: [8, 25, 12, 12]
+      dimension: [8.7, 27, 14, 14]
     ram1:
       name: RAM
-      dimension: [25, 30, 8, 16]
+      dimension: [26.5, 28.9, 7.4, 13.4]
+    unk1:
+      name: Unknown 1
+      dimension: [9.3, 18.9, 4.7, 5]
+    unk2:
+      name: Unknown 2
+      dimension: [18.0, 15.2, 13.1, 6.8]
       
   connectors:
     usb_1:
@@ -23,7 +29,7 @@ board:
       
     ethernet:
       name: Ethernet 10/100MBit
-      dimension: [10, -3.4, 17, 16]
+      dimension: [14, -3.4, 17, 16]
       
     micro_usb:
       name: Micro-USB / 5V Power Supply
@@ -199,7 +205,7 @@ board:
 
     ser_con:
       name: Serial Console Connector
-      dimension: [28, 2, 2.54, 7.62]
+      dimension: [35, 0, 2.54, 7.62]
       pin_type: std254
       pins:
         1:
