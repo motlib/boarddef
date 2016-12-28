@@ -1,8 +1,6 @@
 
 
-board:
-  viewport: [-5, -5, 60, 60]
-  
+board:  
   name: OrangePi Zero
   
   pcb: 

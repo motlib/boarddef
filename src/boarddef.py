@@ -1,4 +1,5 @@
 
+import logging
 import yaml
 from jinja2 import Environment, Template, PackageLoader
 from cmdlapp import CmdlApp
@@ -50,12 +51,55 @@ class BoardDefGen(CmdlApp):
                     float(conn['dimension'][1]) + 2.54 * float(pin['offset'][1]),
                 ]
 
+    def check_dim(self, dim, dmin, dmax):
+        dext = [dim[0] + dim[2], dim[1] + dim[3]]
+        
+        if dim[0] < dmin[0]:
+            dmin[0] = dim[0]
+        if dim[1] < dmin[1]:
+            dmin[1] = dim[1]
 
+        if dext[0] > dmax[0]:
+            dmax[0] = dext[0]
+        if dext[1] > dmax[1]:
+            dmax[1] = dext[1]
+            
+
+    def find_overall_dimensions(self, data):
+        dmin = [0, 0]
+        dmax = [0, 0]
+
+        self.check_dim(data['board']['pcb']['dimension'], dmin, dmax)
+
+        for lst in ('connectors', 'ics'):
+            for obj in data['board'][lst].values():
+                self.check_dim(obj['dimension'], dmin, dmax)
+        
+        logging.info('Board bounding box: {0} {1}'.format(dmin, dmax))
+
+        return [dmin[0], dmin[1], dmax[0] - dmin[0], dmax[1] - dmin[1]]
+
+    
+    def set_viewport(self, data):
+        dims = self.find_overall_dimensions(data)
+
+        dist = 0
+        
+        data['board']['viewport'] = [
+            dims[0] - dist,
+            dims[1] - dist,
+            dims[2] + dist,
+            dims[3] + dist
+        ]
+        
+        
     def generate(self):
         filename = self.args.board
 
         data = self.load_yaml(filename)
         self.update_pins(data)
+
+        self.set_viewport(data)
 
         env = Environment(loader=PackageLoader('boarddef', 'templates'))
 
