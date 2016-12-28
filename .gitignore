@@ -1,5 +1,5 @@
 # Ignore generated board files
-web/*.html
+boards/*.html
 
 # Python cache and compiled modules
 __pycache__
