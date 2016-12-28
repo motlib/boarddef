@@ -13,3 +13,8 @@ body {
 .ic {
     fill: #232830;
 }
+
+table.pins {
+    border-collapse: collapse;
+    font-size: small;
+}

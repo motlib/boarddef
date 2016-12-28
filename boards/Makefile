@@ -5,6 +5,8 @@ BOARDS=$(subst .yaml,,$(wildcard *.yaml))
 HTMLS=$(addsuffix .html,${BOARDS})
 
 
+new: clean all
+
 all: ${HTMLS}
 
 %.html: %.yaml

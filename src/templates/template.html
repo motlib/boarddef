@@ -27,12 +27,11 @@
 
     <h3>{{ cname }}: {{ conn.name }}</h3>
     
-    <table border="1">
+    <table class="pins" border="1">
       <tr>
 	<th>Connector</th><th>Pin Number</th><th>Class</th><th>Pin Name</th>
       </tr>
 
-    <ul>
       {% for pname,pin in conn.pins.items() %}
       <tr>
 	<td>{{ cname }}</td>
