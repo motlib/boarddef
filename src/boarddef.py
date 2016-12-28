@@ -46,8 +46,8 @@ class BoardDefGen(CmdlApp):
         
             for pin in conn['pins'].values():
                 pin['position'] = [
-                    int(conn['dimension'][0]) + (2.54 * int(pin['offset'][0])),
-                    int(conn['dimension'][1]) + 2.54 * int(pin['offset'][1]),
+                    float(conn['dimension'][0]) + (2.54 * float(pin['offset'][0])),
+                    float(conn['dimension'][1]) + 2.54 * float(pin['offset'][1]),
                 ]
 
 
