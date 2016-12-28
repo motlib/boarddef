@@ -1,6 +1,6 @@
 
 import yaml
-from jinja2 import Environment, Template, FileSystemLoader
+from jinja2 import Environment, Template, PackageLoader
 from cmdlapp import CmdlApp
 
 
@@ -57,7 +57,7 @@ class BoardDefGen(CmdlApp):
         data = self.load_yaml(filename)
         self.update_pins(data)
 
-        env = Environment(loader=FileSystemLoader('../templates'))
+        env = Environment(loader=PackageLoader('boarddef', 'templates'))
 
         t = env.get_template('template.html')
 
