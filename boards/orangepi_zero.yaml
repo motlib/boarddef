@@ -34,6 +34,10 @@ board:
     micro_usb:
       name: Micro-USB / 5V Power Supply
       dimension: [6, 43, 7.3, 5.7]
+
+    wifi_ant:
+      name: Wifi Antenna Connector
+      dimension: [4.2, 15.4, 2.5, 2.5]
       
     ext_13:
       name: 13 Pin Extension Connector
