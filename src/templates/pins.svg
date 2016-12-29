@@ -1,0 +1,34 @@
+{% macro std254(pin) %}
+<g transform="translate({{ pin.x }}, {{ pin.y }})"
+   onMouseOver="setInfo(this, '{{ pin.name }}');">
+
+  {% if pin.tag == 1 %}
+  <path d="M0.22 0.22 L2.3 0.22 L2.3 2.3 L0.22 2.3 Z" 
+	style="fill: #2222ff" />
+  {% else %}
+  <path d="M0.22 0.22 L2.3 0.22 L2.3 2.3 L0.22 2.3 Z" 
+	style="fill: #222222" />
+  {% endif %}
+
+  <!-- Metal pin -->
+  <rect x="1.03" y="1.03" width="0.5" height="0.5"
+	style="fill: #ffff00" />
+</g>
+{% endmacro %}
+
+
+{% macro pad254(pin) %}
+<g transform="translate({{ pin.x }}, {{ pin.y }})"
+   onMouseOver="setInfo(this, '{{ pin.name }}');">
+  <!-- <rect x="0.12" y="0.12" width="2.4" height="2.4" -->
+
+  {% if pin.tag == 1 %}
+  <circle cx="1.27" cy="1.27" r="0.8"
+	  style="fill: #2222ff" />
+  {% else %}
+  <circle cx="1.27" cy="1.27" r="0.8"
+	  style="fill: #ffff00" />
+  {% endif %}
+</g>
+{% endmacro %}
+

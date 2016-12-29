@@ -1,0 +1,17 @@
+{% macro std(chip) %}
+<g transform="translate){{ chip.x }}, {{ chip.y }})">
+  <rect class="ic" onMouseOver="setInfo(this, '{{ chip.name }}');"
+	x="{{ chip.x }}"
+	y="{{ chip.y }}"
+	width="{{ chip.width }}" 
+	height="{{ chip.height }}" />
+  <text x="{{ chip.x + (chip.width / 2) }}"
+	y="{{ chip.y + (chip.height / 2)}}"
+	style="font-size:0.4mm;
+	       fill: #eeeeee;
+	       stroke:none;
+	       text-anchor:middle">
+    {{ chip.name }}
+  </text>
+</g>
+{% endmacro %}
