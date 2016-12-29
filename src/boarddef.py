@@ -1,5 +1,9 @@
 '''boarddef is a tool to generate html documentation for SBCs
-(sinble-board computers) from yaml description files.'''
+(sinble-board computers) from yaml description files.
+
+The HTML contains embedded SVG and javascript to let you interactively
+explore pin functions.'''
+
 
 import logging
 import yaml
@@ -97,6 +101,12 @@ class BoardDefGen(CmdlApp):
 
         
     def load_yaml(self, filename):
+        '''Load the YAML file data. '''
+
+        msg = "Loading board definition from '{filename}."
+        logging.info(msg.format(
+            filename=filename))
+                     
         with open(filename, 'r') as f:
             data = yaml.load(f)
 
