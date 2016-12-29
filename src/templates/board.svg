@@ -1,4 +1,5 @@
 {% import 'pins.svg' as pins %}
+{% import 'chips.svg' as chips %}
 
 <svg width="300" height="300"
      viewBox="{{ board.getSvgViewBox() }}">     
@@ -15,25 +16,19 @@
 
 
   {% for chip in board.chips %}
-  <rect class="ic" onMouseOver="setInfo(this, '{{ chip.name }}');"
-	x="{{ chip.x }}"
-	y="{{ chip.y }}"
-	width="{{ chip.width }}" 
-	height="{{ chip.height }}" />
+  {{ chips.std(chip) }}
   {% endfor %}
   
   {% for conn in board.connectors %}
-  <rect class="conn" onMouseOver="setInfo(this, '{{ conn.name }}');"
-	x="{{ conn.x }}"
-	y="{{ conn.y }}"
-	width="{{ conn.width }}" 
-	height="{{ conn.height }}" />
-
+    <rect class="conn" onMouseOver="setInfo(this, '{{ conn.name }}');"
+    	x="{{ conn.x }}"
+    	y="{{ conn.y }}"
+    	width="{{ conn.width }}" 
+    	height="{{ conn.height }}" />
+    
     {% for pin in conn.pins %}
-    {% if conn.pin_type == 'std254' %}
-    {{ pins.std254(pin) }}
-    {% endif %}
-    {% endfor %}
+      {{ pins|attr(conn.pin_type)(pin) }}
+    {% endfor %} {# pin #}
   
-  {% endfor %}
+  {% endfor %} {# conn #}
 </svg>

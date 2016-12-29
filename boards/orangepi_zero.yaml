@@ -95,7 +95,11 @@ connectors:
   ext_26:
     name: 26 Pin Extension Connector
     dimension: [40.5, 7.4, 5.08, 33.02]
-    pin_type: std254
+    pin_type: pad254
+#    pin_grid_x: 2.54
+#    pin_grid_y: 2.54
+#    pin_offset_x: 0
+#    pin_offset_y: 0
     pins:
       1:
         name: +3.3V
