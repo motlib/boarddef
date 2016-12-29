@@ -2,9 +2,7 @@
 {% import 'chips.svg' as chips %}
 
 <svg width="800" height="400"
-     viewBox="{{ board.getSvgViewBox() }}">     
-
-     <style href="styles.css" type="text/css" />
+     viewBox="{{ board.getSvgViewBox() }}">
 
   <!-- PCB -->
   <rect class="pcb"

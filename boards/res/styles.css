@@ -18,3 +18,7 @@ table.pins {
     border-collapse: collapse;
     font-size: small;
 }
+
+tr.net_power {
+    background-color: #ff3333;
+}

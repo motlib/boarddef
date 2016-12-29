@@ -33,7 +33,7 @@
       </tr>
 
       {% for pin in conn.pins %}
-      <tr>
+      <tr class="net_{{ pin.net }}">
 	<td>{{ conn.tag }}</td>
 	<td>{{ pin.tag }}</td>
 	<td>{{ pin.net }}</td>
