@@ -1,18 +1,7 @@
-<svg width="300" height="300"
-     viewBox="{{ board.getSvgViewBox() }}">
+{% import 'pins.svg' as pins %}
 
-     <defs>
-       <g id="pin_std254">
-	 <!-- <rect x="0.12" y="0.12" width="2.4" height="2.4" -->
-	 
-	 <path d="M0.22 0.22 L2.3 0.22 L2.3 2.3 L0.22 2.3 Z" 
-	       style="fill: #222222" />
-	 
-	 <rect x="1.03" y="1.03" width="0.5" height="0.5"
-	       style="fill: #ffff00" />
-       </g>
-     </defs>
-     
+<svg width="300" height="300"
+     viewBox="{{ board.getSvgViewBox() }}">     
 
      <style href="styles.css" type="text/css" />
 
@@ -24,15 +13,14 @@
 	height="{{ board.pcb.height }}"
 	rx="2" ry="2" />
 
-  {#
-  {% for ic in board.ics.values() %}
-  <rect class="ic" onMouseOver="setInfo(this, '{{ ic.name }}');"
-	x="{{ ic.dimension[0] }}"
-	y="{{ ic.dimension[1] }}"
-	width="{{ ic.dimension[2] }}" 
-	height="{{ ic.dimension[3] }}" />
+
+  {% for chip in board.chips %}
+  <rect class="ic" onMouseOver="setInfo(this, '{{ chip.name }}');"
+	x="{{ chip.x }}"
+	y="{{ chip.y }}"
+	width="{{ chip.width }}" 
+	height="{{ chip.height }}" />
   {% endfor %}
-  #}
   
   {% for conn in board.connectors %}
   <rect class="conn" onMouseOver="setInfo(this, '{{ conn.name }}');"
@@ -41,14 +29,11 @@
 	width="{{ conn.width }}" 
 	height="{{ conn.height }}" />
 
-    {% if conn.pins %}
     {% for pin in conn.pins %}
-    <use xlink:href="#pin_std254"
-	 onMouseOver="setInfo(this, '{{ pin.name }}');"
-	 x="{{ pin.x }}"
-	 y="{{ pin.y }}" />
-    {% endfor %}
+    {% if conn.pin_type == 'std254' %}
+    {{ pins.std254(pin) }}
     {% endif %}
+    {% endfor %}
   
   {% endfor %}
 </svg>
