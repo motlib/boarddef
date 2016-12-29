@@ -1,0 +1,215 @@
+name: Raspberry Pi 3
+
+pcb: 
+  dimension: [0, 0, 85, 56]
+
+ics:
+  main:
+    name: BCM2835
+    description: Main Processor and RAM
+    dimension: [20, 17.4, 14, 14]
+  lan:
+    name: LAN9512
+    description: Ethernet interface and USB
+    dimension: [55.3, 17.8, 8.9, 8.9]
+    
+connectors:
+  usb_1:
+    name: USB-A Connector
+    dimension: [69.4, 2.4, 17.6, 13.2]
+
+  usb_2:
+    name: USB-A Connector
+    dimension: [69.4, 20.2, 17.6, 13.2]
+
+  ethernet:
+    name: Ethernet Connector
+    dimension: [65.6, 37.9, 21.3, 15.5]
+
+  rc1:
+    name: DSI Connector
+    description: Parallel display connector
+    dimension: [1.5, 16.8, 4.0, 22.3]
+
+  rc2:
+    name: CSI Connector
+    description: Camera connector
+    dimension: [43.5, 33.3, 4.0, 22.3]
+
+  micro_usb:
+    name: Micro-USB Power
+    dimension: [6.8, 51.4, 7.4, 6.0]
+
+  hdmi:
+    name: HDMI
+    dimension: [24.7, 45.2, 14.4, 12.3]
+
+  av:
+    name: Audio / Video Connector
+    dimension: [49.9, 43.5, 7.0, 14.9]
+    
+  ext_40:
+    name: 40 Pin Extension Connector
+    dimension: [7.1, 1, 50.8, 5.08]
+    pin_type: std254
+    pins:
+      1:
+        name: +3.3V
+        offset: [0, 1]
+        net: power
+      2:
+        name: +5V
+        offset: [0, 0]
+        net: power
+      3:
+        name: GPIO2 / SDA1
+        offset: [1, 1]
+        net: io
+      4:
+        name: +5V
+        offset: [1, 0]
+        net: power
+      5:
+        name: GPIO3 / SCL1 /
+        offset: [2, 1]
+        net: io
+      6:
+        name: GND
+        offset: [2, 0]
+        net: power
+      7:
+        name: GPIO4
+        offset: [3, 1]
+        net: io
+      8:
+        name: GPIO14 / UART0_TXD
+        offset: [3, 0]
+        net: io
+      9:
+        name: GND
+        offset: [4, 1]
+        net: power
+      10:
+        name: GPIO15 / UART0_RXD
+        offset: [4, 0]
+        net: io
+      11:
+        name: GPIO17
+        offset: [5, 1]
+        net: io
+      12:
+        name: GPIO18 / PCM_CLK
+        offset: [5, 0]
+        net: io
+      13:
+        name: GPIO27
+        offset: [6, 1]
+        net: io
+      14:
+        name: GND
+        offset: [6, 0]
+        net: power
+      15:
+        name: GPIO22
+        offset: [7, 1]
+        net: io
+      16:
+        name: GPIO23
+        offset: [7, 0]
+        net: io
+      17:
+        name: +3.3V
+        offset: [8, 1]
+        net: power
+      18:
+        name: GPIO24
+        offset: [8, 0]
+        net: io
+      19:
+        name: GPIO10 / SPI0_MOSI
+        offset: [9, 1]
+        net: io
+      20:
+        name: GND
+        offset: [9, 0]
+        net: power
+      21:
+        name: GPIO9 / SPI0_MISO
+        offset: [10, 1]
+        net: io
+      22:
+        name: GPIO25
+        offset: [10, 0]
+        net: io
+      23:
+        name: GPIO11 / SPI0_SCLK
+        offset: [11, 1]
+        net: io
+      24:
+        name: GPIO8 / SPI0_CE0_N
+        offset: [11, 0]
+        net: io
+      25:
+        name: GND
+        offset: [12, 1]
+        net: power
+      26:
+        name: GPIO7 / SPI0_CE1_N
+        offset: [12, 0]
+        net: io
+      27:
+        name: ID_SD / I2C ID EEPROM
+        offset: [13, 1]
+        net: io
+      28:
+        name: ID_SC / I2C ID EEPROM
+        offset: [13, 0]
+        net: io
+      29:
+        name: GPIO5
+        offset: [14, 1]
+        net: io
+      30:
+        name: GND
+        offset: [14, 0]
+        net: power
+      31:
+        name: GPIO6
+        offset: [15, 1]
+        net: io
+      32:
+        name: GPIO12
+        offset: [15, 0]
+        net: io
+      33:
+        name: GPIO13
+        offset: [16, 1]
+        net: io
+      34:
+        name: GND
+        offset: [16, 0]
+        net: power
+      35:
+        name: GPIO19
+        offset: [17, 1]
+        net: io
+      36:
+        name: GPIO16
+        offset: [17, 0]
+        net: io
+      37:
+        name: GPIO26
+        offset: [18, 1]
+        net: io
+      38:
+        name: GPIO20
+        offset: [18, 0]
+        net: io
+      39:
+        name: GND
+        offset: [19, 1]
+        net: power
+      40:
+        name: GPIO21
+        offset: [19, 0]
+        net: io
