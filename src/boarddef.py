@@ -1,10 +1,127 @@
+'''boarddef is a tool to generate html documentation for SBCs
+(sinble-board computers) from yaml description files.'''
 
 import logging
 import yaml
-from jinja2 import Environment, Template, PackageLoader
+from jinja2 import Environment, Template, FileSystemLoader
 from cmdlapp import CmdlApp
 
 
+class Shape():
+    def loadData(self, tag, data):
+        self.tag = tag
+
+        self.x = data['dimension'][0]
+        self.y = data['dimension'][1]
+        self.width = data['dimension'][2]
+        self.height = data['dimension'][3]
+
+        if 'name' in data:
+            self.name = data['name']
+        else:
+            self.name = 'unknown'
+
+    def getBBox(self):
+        return (
+            self.x,
+            self.y,
+            self.x + self.width,
+            self.y + self.height
+        )
+
+    def __str__(self):
+        return "{tag} [{x}:{y} +{width} +{height}]".format(
+            tag=self.tag, x=self.x, y=self.y,
+            width=self.width, height=self.height)
+
+    
+class Pin(Shape):
+    def loadData(self, tag, data):
+        Shape.loadData(self, tag, data)
+
+        self.net = data.get('net', '')
+
+
+class Connector(Shape):
+    pin_grids = {
+        'std254': [2.54, 2.54],
+    }
+    def loadData(self, tag, data):
+        Shape.loadData(self, tag, data)
+        
+        self.pin_type = data.get('pin_type', None)
+        if self.pin_type != None:
+            self.pin_grid = self.pin_grids[self.pin_type]
+
+        self._createPins(data)
+
+        
+    def _createPins(self, data):
+        '''Calculate the coordinates for each single pin.'''
+
+        self.pins = []
+        
+        for p_tag, p_data in data.get('pins', {}).items():
+            p_data['dimension'] = [
+                self.x + (float(p_data['offset'][0]) * self.pin_grid[0]),
+                self.y + (float(p_data['offset'][1]) * self.pin_grid[1]),
+                self.x + (float((p_data['offset'][0]) + 1) * self.pin_grid[0]),
+                self.y + (float((p_data['offset'][1]) + 1)* self.pin_grid[1]),
+            ]
+
+            pin = Pin()
+            pin.loadData(p_tag, p_data)
+            self.pins.append(pin)
+                
+
+class Pcb(Shape):
+    def loadData(self, data):
+        Shape.loadData(self, 'pcb', data)
+
+        
+class BoardDef():
+    def getSvgViewBox(self):
+        bbox = self.getBBox()
+
+        return ' '.join(str(d) for d in bbox)
+        
+    def loadData(self, data):
+        self.name = data['name']
+
+        self.pcb = Pcb()
+        self.pcb.loadData(data['pcb'])
+
+        self.connectors = []
+        for c_tag,c_data in data['connectors'].items():
+            conn = Connector()
+            conn.loadData(c_tag, c_data)
+            self.connectors.append(conn)
+
+            
+    def getBBox(self):
+        bbox = list(self.pcb.getBBox())
+
+        for conn in self.connectors:
+            self.updateBBox(bbox, conn.getBBox())
+
+        return bbox
+
+
+    def updateBBox(self, bbox, new_bbox):
+        if new_bbox[0] < bbox[0]:
+            bbox[0] = new_bbox[0]
+            
+        if new_bbox[1] < bbox[1]:
+            bbox[1] = new_bbox[1]
+            
+        if new_bbox[2] > bbox[2]:
+            bbox[2] = new_bbox[2]
+            
+        if new_bbox[3] > bbox[3]:
+            bbox[3] = new_bbox[3]
+            
+            
+            
 class BoardDefGen(CmdlApp):
     def __init__(self):
         super().__init__()
@@ -29,7 +146,12 @@ class BoardDefGen(CmdlApp):
             '-o', '--output',
             help='Output file.',
             default='-')
-        
+
+        self.parser.add_argument(
+            '-t', '--templates',
+            help='Template files.',
+            default='templates')
+
         
     def load_yaml(self, filename):
         with open(filename, 'r') as f:
@@ -38,74 +160,26 @@ class BoardDefGen(CmdlApp):
         return data
 
 
-    def update_pins(self, data):
-        '''Calculate the coordinates for each single pin.'''
-    
-        for conn in data['board']['connectors'].values():
-            if not 'pins' in conn.keys():
-                continue
-        
-            for pin in conn['pins'].values():
-                pin['position'] = [
-                    float(conn['dimension'][0]) + (2.54 * float(pin['offset'][0])),
-                    float(conn['dimension'][1]) + 2.54 * float(pin['offset'][1]),
-                ]
-
-    def check_dim(self, dim, dmin, dmax):
-        dext = [dim[0] + dim[2], dim[1] + dim[3]]
-        
-        if dim[0] < dmin[0]:
-            dmin[0] = dim[0]
-        if dim[1] < dmin[1]:
-            dmin[1] = dim[1]
-
-        if dext[0] > dmax[0]:
-            dmax[0] = dext[0]
-        if dext[1] > dmax[1]:
-            dmax[1] = dext[1]
-            
-
-    def find_overall_dimensions(self, data):
-        dmin = [0, 0]
-        dmax = [0, 0]
-
-        self.check_dim(data['board']['pcb']['dimension'], dmin, dmax)
-
-        for lst in ('connectors', 'ics'):
-            for obj in data['board'][lst].values():
-                self.check_dim(obj['dimension'], dmin, dmax)
-        
-        logging.info('Board bounding box: {0} {1}'.format(dmin, dmax))
-
-        return [dmin[0], dmin[1], dmax[0] - dmin[0], dmax[1] - dmin[1]]
-
-    
-    def set_viewport(self, data):
-        dims = self.find_overall_dimensions(data)
-
-        dist = 0
-        
-        data['board']['viewport'] = [
-            dims[0] - dist,
-            dims[1] - dist,
-            dims[2] + dist,
-            dims[3] + dist
-        ]
         
         
     def generate(self):
         filename = self.args.board
 
         data = self.load_yaml(filename)
-        self.update_pins(data)
 
-        self.set_viewport(data)
+        bdef = BoardDef()
+        bdef.loadData(data)
 
-        env = Environment(loader=PackageLoader('boarddef', 'templates'))
+        msg = 'Board bounding box: {0}'
+        logging.info(msg.format(
+            bdef.getBBox()))
+
+
+        env = Environment(loader=FileSystemLoader(self.args.templates))
 
         t = env.get_template('template.html')
 
-        svg = t.render(board=data['board'])
+        svg = t.render(board=bdef)
 
         if self.args.output == '-':
             print(svg)

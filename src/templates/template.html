@@ -22,20 +22,20 @@
 
     <h2>Pins</h2>
 
-    {% for cname,conn in board.connectors.items() %}
+    {% for conn in board.connectors %}
     {% if conn.pins %}
 
-    <h3>{{ cname }}: {{ conn.name }}</h3>
+    <h3>{{ conn.tag }}: {{ conn.name }}</h3>
     
     <table class="pins" border="1">
       <tr>
 	<th>Connector</th><th>Pin Number</th><th>Class</th><th>Pin Name</th>
       </tr>
 
-      {% for pname,pin in conn.pins.items() %}
+      {% for pin in conn.pins %}
       <tr>
-	<td>{{ cname }}</td>
-	<td>{{ pname }}</td>
+	<td>{{ conn.tag }}</td>
+	<td>{{ pin.tag }}</td>
 	<td>{{ pin.net }}</td>
 	<td>{{ pin.name }}</td>
       </tr>

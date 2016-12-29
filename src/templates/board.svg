@@ -1,5 +1,5 @@
 <svg width="300" height="300"
-     viewBox="{{ board.viewport[0] }} {{ board.viewport[1] }} {{ board.viewport[2] }} {{ board.viewport[3] }}">
+     viewBox="{{ board.getSvgViewBox() }}">
 
      <defs>
        <g id="pin_std254">
@@ -18,12 +18,13 @@
 
   <!-- PCB -->
   <rect class="pcb"
-	x="{{ board.pcb.dimension[0] }}"
-	y="{{ board.pcb.dimension[1] }}"
-	width="{{ board.pcb.dimension[2] }}" 
-	height="{{ board.pcb.dimension[3] }}"
+	x="{{ board.pcb.x }}"
+	y="{{ board.pcb.y}}"
+	width="{{ board.pcb.width }}" 
+	height="{{ board.pcb.height }}"
 	rx="2" ry="2" />
 
+  {#
   {% for ic in board.ics.values() %}
   <rect class="ic" onMouseOver="setInfo(this, '{{ ic.name }}');"
 	x="{{ ic.dimension[0] }}"
@@ -31,20 +32,21 @@
 	width="{{ ic.dimension[2] }}" 
 	height="{{ ic.dimension[3] }}" />
   {% endfor %}
+  #}
   
-  {% for conn in board.connectors.values() %}
+  {% for conn in board.connectors %}
   <rect class="conn" onMouseOver="setInfo(this, '{{ conn.name }}');"
-	x="{{ conn.dimension[0] }}"
-	y="{{ conn.dimension[1] }}"
-	width="{{ conn.dimension[2] }}" 
-	height="{{ conn.dimension[3] }}" />
+	x="{{ conn.x }}"
+	y="{{ conn.y }}"
+	width="{{ conn.width }}" 
+	height="{{ conn.height }}" />
 
     {% if conn.pins %}
-    {% for pin in conn.pins.values() %}
+    {% for pin in conn.pins %}
     <use xlink:href="#pin_std254"
 	 onMouseOver="setInfo(this, '{{ pin.name }}');"
-	 x="{{ pin.position[0] }}"
-	 y="{{ pin.position[1] }}" />
+	 x="{{ pin.x }}"
+	 y="{{ pin.y }}" />
     {% endfor %}
     {% endif %}
   
