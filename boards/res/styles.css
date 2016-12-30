@@ -20,5 +20,17 @@ table.pins {
 }
 
 tr.net_power {
-    background-color: #ff3333;
+    background-color: #b9493e;
+}
+
+tr.net_io {
+    background-color: #eb974e;
+}
+
+tr.net_audio {
+    background-color: #1164d5;
+}
+
+tr.net_bus {
+    background-color: #43b74b;
 }
