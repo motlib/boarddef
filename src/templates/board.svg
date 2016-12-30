@@ -23,7 +23,8 @@
   {% endfor %}
   
   {% for conn in board.connectors %}
-    <rect class="conn" onMouseOver="setInfo(this, '{{ conn.name }}');"
+  <rect class="conn"
+	onMouseOver="setInfo(this, 'conn_{{ conn.tag }}');"
     	x="{{ conn.x }}"
     	y="{{ conn.y }}"
     	width="{{ conn.width }}" 

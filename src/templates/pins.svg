@@ -1,3 +1,6 @@
+{% macro pintag(pin) %}
+{% endmacro %}
+
 {% macro std254(pin) %}
 <g transform="translate({{ pin.x }}, {{ pin.y }})"
    style="pointer-events:all;">
@@ -5,24 +8,30 @@
   {% if pin.tag == 1 %}
   <path d="M0.22 0.22 L2.3 0.22 L2.3 2.3 L0.22 2.3 Z" 
 	style="fill: #2222ff"
-	onMouseOver="setInfo(this, '{{ pin.name }}');"/>
+	onMouseOver="setInfo(this, 'pin_{{ pin.connector.tag }}_{{ pin.tag }}');"/>
   {% else %}
   <path d="M0.22 0.22 L2.3 0.22 L2.3 2.3 L0.22 2.3 Z" 
 	style="fill: #222222"
-	onMouseOver="setInfo(this, '{{ pin.name }}');"/>
+	onMouseOver="setInfo(this, 'pin_{{ pin.connector.tag }}_{{ pin.tag }}');"/>
   {% endif %}
 
   <!-- Metal pin -->
   <rect x="1.03" y="1.03" width="0.5" height="0.5"
 	style="fill: #ffff00; pointer-events:none;" />
+
+  <text x="1.27" y="2.2"
+	style="font-size:0.25mm;
+	       fill:#ffffff;
+	       stroke:none;
+	       text-anchor:middle;
+	       pointer-events:none;">{{pin.tag}}</text>
 </g>
 {% endmacro %}
 
 
 {% macro pad254(pin) %}
 <g transform="translate({{ pin.x }}, {{ pin.y }})"
-   onMouseOver="setInfo(this, '{{ pin.name }}');">
-  <!-- <rect x="0.12" y="0.12" width="2.4" height="2.4" -->
+   onMouseOver="setInfo(this, 'pin_{{ pin.connector.tag }}_{{ pin.tag }}');">
 
   {% if pin.tag == 1 %}
   <circle cx="1.27" cy="1.27" r="0.8"
@@ -31,6 +40,13 @@
   <circle cx="1.27" cy="1.27" r="0.8"
 	  style="fill: #ffff00" />
   {% endif %}
+
+  <text x="1.27" y="1.6"
+	style="font-size:0.25mm;
+	       fill:#000000;
+	       pointer-events:none;
+	       stroke:none;
+	       text-anchor:middle;">{{pin.tag}}</text>
 </g>
 {% endmacro %}
 

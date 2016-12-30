@@ -1,3 +1,4 @@
+{% import 'data.js' as data %}
 <html>
 
   <head>
@@ -7,18 +8,30 @@
 
   <body>
     <script src="res/functions.js"></script>
+    <script>{{ data.database(board) }}</script>
 
     <h1>{{ board.name }}</h1>
 
-    <div style="margin: 5pt">
+    <div style="margin: 5pt; float: left;">
       {% include "board.svg" %}
     </div>
-    
-    <div id="info" style="border: 1pt solid gray; height:
-			  50px;font-size: small;">
-      &nbsp;
-    </div>
 
+
+    <table class="data" border="1">
+      <tr>
+	<th style="text-align:left;">Tag</th>
+	<td id="data_tag" style="width:500px;"></td>
+      </tr>
+      <tr>
+	<th style="text-align:left;">Name</th>
+	<td id="data_name" style="width:500px;"></td>
+      </tr>
+      <tr>
+	<th style="text-align:left;">Description</th>
+	<td id="data_desc" style="width:500px;"></td>
+      </tr>
+    </table>
+      
 
     <h2>Pins</h2>
 
@@ -27,7 +40,7 @@
 
     <h3>{{ conn.tag }}: {{ conn.name }}</h3>
     
-    <table class="pins" border="1">
+    <table class="data" border="1">
       <tr>
 	<th>Connector</th><th>Pin Number</th><th>Class</th><th>Pin Name</th>
       </tr>

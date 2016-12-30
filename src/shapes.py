@@ -103,6 +103,7 @@ class Connector(Shape):
 
             pin = Pin()
             pin.loadData(p_tag, p_data)
+            pin.connector = self
             self.pins.append(pin)
 
         self.pins.sort(key=lambda p:p.tag)

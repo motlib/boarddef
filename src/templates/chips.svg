@@ -1,5 +1,6 @@
 {% macro std(chip) %}
-<g onMouseOver="setInfo(this, '{{ chip.name }}');" style="pointer-events:all;">
+<g onMouseOver="setInfo(this, 'chip_{{ chip.tag }}');"
+   style="pointer-events:all;">
   <rect class="ic"
 	x="{{ chip.x }}"
 	y="{{ chip.y }}"
