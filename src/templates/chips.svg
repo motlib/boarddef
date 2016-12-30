@@ -1,6 +1,6 @@
 {% macro std(chip) %}
-<g>
-  <rect class="ic" onMouseOver="setInfo(this, '{{ chip.name }}');"
+<g onMouseOver="setInfo(this, '{{ chip.name }}');" style="pointer-events:all;">
+  <rect class="ic"
 	x="{{ chip.x }}"
 	y="{{ chip.y }}"
 	width="{{ chip.width }}" 
@@ -11,7 +11,8 @@
 	style="font-size:0.4mm;
 	       fill: #eeeeee;
 	       stroke:none;
-	       text-anchor:middle">
+	       text-anchor:middle;
+	       pointer-events:none;">
     {{ chip.name }}
   </text>
 </g>
