@@ -5,8 +5,9 @@
 	y="{{ chip.y }}"
 	width="{{ chip.width }}" 
 	height="{{ chip.height }}" />
-  <text x="{{ chip.x + (chip.width / 2) }}"
-	y="{{ chip.y + (chip.height / 2)}}"
+  
+  <text x="{{ chip.center_x }}"
+	y="{{ chip.center_y + 0.2}}"
 	style="font-size:0.4mm;
 	       fill: #eeeeee;
 	       stroke:none;

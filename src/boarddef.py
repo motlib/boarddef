@@ -1,8 +1,11 @@
-'''boarddef is a tool to generate html documentation for SBCs
-(sinble-board computers) from yaml description files.
+'''boarddef is a tool to generate HTML documentation for SBCs
+(single-board computers like Raspberry Pi, etc.) from YAML description
+files.
 
 The HTML contains embedded SVG and javascript to let you interactively
-explore pin functions.'''
+explore pin functions.
+
+'''
 
 
 import logging

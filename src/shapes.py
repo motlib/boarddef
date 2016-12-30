@@ -9,11 +9,15 @@ class Shape():
         self.width = data['dimension'][2]
         self.height = data['dimension'][3]
 
+        self.center_x = self.x + (self.width / 2.0)
+        self.center_y = self.y + (self.height / 2.0)
+
         if 'name' in data:
             self.name = data['name']
         else:
             self.name = 'unknown'
 
+            
     def getBBox(self):
         return (
             self.x,
@@ -21,6 +25,7 @@ class Shape():
             self.x + self.width,
             self.y + self.height
         )
+
 
     def __str__(self):
         return "{cname}({tag}) [{x}:{y} +{width} +{height}]".format(
