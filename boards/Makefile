@@ -10,7 +10,7 @@ new: clean all
 all: ${HTMLS}
 
 %.html: %.yaml
-	python3 ../src/boarddef.py -t ../src/templates -b $< -o $@
+	python3 ../src/boarddef.py -t ../src/templates -o $@ $<
 
 .PHONY: clean
 clean:

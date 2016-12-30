@@ -18,6 +18,8 @@ from shapes import Pin, Connector, Pcb, Chip
         
 class BoardDef():
     def getSvgViewBox(self):
+        '''Returns a string suitable to be set in the SVG viewBox property.'''
+        
         bbox = self.getBBox()
 
         return "{0} {1} {2} {3}".format(
@@ -81,16 +83,16 @@ class BoardDefGen(CmdlApp):
             main_fct=self.generate,
             use_cfgfile=False,
             tool_name='boarddef',
-            tool_version='0.0')
+            tool_version='0.0',
+            log_stream='stderr')
 
     
     def setup_arg_parser(self):
         CmdlApp.setup_arg_parser(self)
                 
         self.parser.add_argument(
-            '-b', '--board',
-            help='Board definition file (yaml).',
-            required=True)
+            'board',
+            help='Board definition file (yaml).')
 
         self.parser.add_argument(
             '-o', '--output',
@@ -106,10 +108,10 @@ class BoardDefGen(CmdlApp):
     def load_yaml(self, filename):
         '''Load the YAML file data. '''
 
-        msg = "Loading board definition from '{filename}."
+        msg = "Loading board definition from '{filename}'."
         logging.info(msg.format(
             filename=filename))
-                     
+    
         with open(filename, 'r') as f:
             data = yaml.load(f)
 
@@ -125,10 +127,13 @@ class BoardDefGen(CmdlApp):
         bdef.loadData(data)
 
         msg = 'Board bounding box: {0}'
-        logging.info(msg.format(
+        logging.debug(msg.format(
             bdef.getBBox()))
 
 
+        msg = "Using templates from directory '{0}'."
+        logging.debug(msg.format(self.args.templates))
+        
         env = Environment(
             loader=FileSystemLoader(self.args.templates))
 
@@ -141,6 +146,10 @@ class BoardDefGen(CmdlApp):
         else:
             with open(self.args.output, 'w') as f:
                 f.write(svg)
+
+            msg = "Result written to '{0}'."
+            logging.info(msg.format(
+                self.args.output))
 
         
 if __name__ == '__main__':

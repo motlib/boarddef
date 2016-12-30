@@ -76,13 +76,15 @@ class CmdlApp():
         self.main_fct = None
         self.tool_name = 'unknown_tool'
         self.tool_version = '0.0-dev'
+        self.log_stream = 'stdout'
 
         self._cfg_keys = [
             'main_fct',
             'use_cfgfile',
             'tool_name',
             'tool_version',
-            'loglevel']
+            'loglevel',
+            'log_stream']
 
 
     def configure(self, **args):
@@ -145,12 +147,17 @@ class CmdlApp():
         logfmt = '%(asctime)s %(levelname)s: {toolname}: %(message)s'.format(
             toolname=self.tool_name)
 
+        if self.log_stream == 'stdout':
+            log_stream = sys.stdout
+        else:
+            log_stream = sys.stderr
+            
         logging.basicConfig(
             level=level,
             format=logfmt,
-            stream=sys.stdout)
+            stream=log_stream)
 
-        logging.info('{0} version {1}'.format(
+        logging.info('Version {1}'.format(
             self.tool_name,
             self.tool_version))
 
