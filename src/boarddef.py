@@ -41,6 +41,8 @@ class BoardDef():
             conn.loadData(c_tag, c_data)
             self.connectors.append(conn)
 
+        self.connectors.sort(key=lambda c:c.tag)
+
         self.chips = []
         for ch_tag, ch_data in data['ics'].items():
             chip = Chip()
