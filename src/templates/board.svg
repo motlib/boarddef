@@ -1,5 +1,6 @@
 {% import 'pins.svg' as pins %}
 {% import 'chips.svg' as chips %}
+{% import 'drills.svg' as drills %}
 
 <svg width="800" height="400"
      viewBox="{{ board.getSvgViewBox() }}">
@@ -10,8 +11,12 @@
 	y="{{ board.pcb.y}}"
 	width="{{ board.pcb.width }}" 
 	height="{{ board.pcb.height }}"
-	rx="2" ry="2" />
+	rx="{{ board.pcb.corner_radius }}"
+	ry="{{ board.pcb.corner_radius }}" />
 
+  {% for drill in board.pcb.drills %}
+  {{ drills.std(drill) }}
+  {% endfor %}
 
   {% for chip in board.chips %}
   {{ chips.std(chip) }}

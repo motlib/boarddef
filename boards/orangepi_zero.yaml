@@ -2,7 +2,22 @@ name: OrangePi Zero
 
 pcb: 
   dimension: [0, 0, 46, 48]
+  corner_radius: 1.0
+  drills:
+    1:
+      position: [3, 3]
+      diameter: 2.8
+    2:
+      position: [3, 45]
+      diameter: 2.8
+    3:
+      position: [43, 3]
+      diameter: 2.8
+    4:
+      position: [43, 45]
+      diameter: 2.8
 
+      
 ics:
   main:
     name: Allwinner H2+

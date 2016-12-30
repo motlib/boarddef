@@ -1,5 +1,5 @@
 {% macro std(chip) %}
-<g transform="translate){{ chip.x }}, {{ chip.y }})">
+<g>
   <rect class="ic" onMouseOver="setInfo(this, '{{ chip.name }}');"
 	x="{{ chip.x }}"
 	y="{{ chip.y }}"

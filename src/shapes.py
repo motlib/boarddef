@@ -4,18 +4,38 @@ class Shape():
     def loadData(self, tag, data):
         self.tag = tag
 
-        self.x = data['dimension'][0]
-        self.y = data['dimension'][1]
-        self.width = data['dimension'][2]
-        self.height = data['dimension'][3]
+        if 'dimension' in data:
+            # expect rectangular shape
+            self.x = data['dimension'][0]
+            self.y = data['dimension'][1]
+            self.width = data['dimension'][2]
+            self.height = data['dimension'][3]
+            self.center_x = self.x + (self.width / 2.0)
+            self.center_y = self.y + (self.height / 2.0)
+        elif 'position' in data:
+            # expect cirular shape
+            self.center_x = data['position'][0]
+            self.center_y = data['position'][1]
 
-        self.center_x = self.x + (self.width / 2.0)
-        self.center_y = self.y + (self.height / 2.0)
+            if 'diameter' in data:
+                self.diameter = data['diameter']
+                self.radius = self.diameter / 2.0
+            elif 'radius' in data:
+                self.radius = data['radius']
+                self.diameter = self.radius * 2.0
+            else:
+                msg = "Need radius or diameter given in circular shape tagged '{0}'."
+                raise Exception(msg.format(tag))
 
-        if 'name' in data:
-            self.name = data['name']
-        else:
-            self.name = 'unknown'
+            self.x = self.center_x - self.radius
+            self.y = self.center_y - self.radius
+            self.width = self.diameter
+            self.height = self.diameter
+
+        self.name = data.get('name', tag)
+        self.description = data.get('description', '')
+
+        self.corner_radius = data.get('corner_radius', 0)
 
             
     def getBBox(self):
@@ -34,6 +54,11 @@ class Shape():
             width=self.width, height=self.height)
 
     
+class Drill(Shape):
+    def loadData(self, tag, data):
+        Shape.loadData(self, tag, data)
+        
+    
 class Pin(Shape):
     '''Pin connector'''
     def loadData(self, tag, data):
@@ -41,6 +66,12 @@ class Pin(Shape):
 
         self.net = data.get('net', '')
 
+class Drill(Shape):
+    def loadData(self, tag, data):
+        Shape.loadData(self, tag, data)
+
+        
+        
 
 class Connector(Shape):
     pin_grids = {
@@ -79,8 +110,16 @@ class Connector(Shape):
                 
 
 class Pcb(Shape):
+    def __init__(self):
+        self.drills = []
+        
     def loadData(self, data):
         Shape.loadData(self, 'pcb', data)
+
+        for d_tag, d_data in data.get('drills', {}).items():
+            drill = Drill()
+            drill.loadData(d_tag, d_data)
+            self.drills.append(drill)
 
         
 class Chip(Shape):

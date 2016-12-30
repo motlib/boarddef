@@ -2,6 +2,7 @@ name: Raspberry Pi 3
 
 pcb: 
   dimension: [0, 0, 85, 56]
+  corner_radius: 3
 
 ics:
   main:
