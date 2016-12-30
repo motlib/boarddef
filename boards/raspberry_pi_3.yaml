@@ -3,6 +3,23 @@ name: Raspberry Pi 3
 pcb: 
   dimension: [0, 0, 85, 56]
   corner_radius: 3
+  drills:
+    1:
+      position: [3.5, 3.5]
+      diameter: 3
+      clearance: 6
+    2:
+      position: [3.5, 52.5]
+      diameter: 3
+      clearance: 6
+    3:
+      position: [61.5, 52.5]
+      diameter: 3
+      clearance: 6
+    4:
+      position: [61.5, 3.5]
+      diameter: 3
+      clearance: 6
 
 ics:
   main:

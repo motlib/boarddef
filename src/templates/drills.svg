@@ -1,9 +1,18 @@
 {% macro std(drill) %}
 <g transform="translate({{ drill.center_x }}, {{ drill.center_y }})">
 
+  {% if drill.restring != 0 %}
+  <circle cx="0" cy="0"
+	  r="{{ drill.clearance }}" 
+	  style="fill: #cccccc" />
+  
+  {% endif %}
+
+
   <!-- Simple white drill hole -->
   <circle cx="0" cy="0"
 	  r="{{ drill.radius }}" 
 	  style="fill: #ffffff" />
+
 </g>
 {% endmacro %}

@@ -57,6 +57,9 @@ class Shape():
 class Drill(Shape):
     def loadData(self, tag, data):
         Shape.loadData(self, tag, data)
+
+        # divide by 2.0 to have radius needed for SVG generation
+        self.clearance = data.get('clearance', 0) / 2.0
         
     
 class Pin(Shape):
@@ -65,12 +68,6 @@ class Pin(Shape):
         Shape.loadData(self, tag, data)
 
         self.net = data.get('net', '')
-
-class Drill(Shape):
-    def loadData(self, tag, data):
-        Shape.loadData(self, tag, data)
-
-        
         
 
 class Connector(Shape):

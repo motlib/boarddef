@@ -7,15 +7,19 @@ pcb:
     1:
       position: [3, 3]
       diameter: 2.8
+      clearance: 5
     2:
       position: [3, 45]
       diameter: 2.8
+      clearance: 5
     3:
       position: [43, 3]
       diameter: 2.8
+      clearance: 5
     4:
       position: [43, 45]
       diameter: 2.8
+      clearance: 5
 
       
 ics:
