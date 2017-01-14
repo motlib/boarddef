@@ -1,13 +1,18 @@
 {% import 'data.js' as data %}
+
 <html>
 
   <head>
     <title>{{ board.name }}</title>
     <link rel="stylesheet" href="res/styles.css" />
+
+    <style>
+      {% include 'generic/styles.css' %}
+    </style>
   </head>
 
   <body>
-    <script src="res/functions.js"></script>
+    <script>{% include 'generic/functions.js' %}</script>
     <script>{{ data.database(board) }}</script>
 
     <h1>{{ board.name }}</h1>
