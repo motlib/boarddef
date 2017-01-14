@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="res/styles.css" />
 
     <style>
-      {% include 'generic/styles.css' %}
+      {% include '_generic/styles.css' %}
     </style>
   </head>
 
   <body>
-    <script>{% include 'generic/functions.js' %}</script>
+    <script>{% include '_generic/functions.js' %}</script>
     <script>{{ data.database(board) }}</script>
 
     <h1>{{ board.name }}</h1>
